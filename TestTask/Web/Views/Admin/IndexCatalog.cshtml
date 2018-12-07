@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Core.Entity.Catalog>
+
+@{
+    ViewBag.Title = "Catalog";
+}
+
+<h2>List of catalog</h2>
+
+<p>
+    <a asp-controller="Admin" asp-action="CreateCatalog">Create</a>
+</p>
+
+<p>
+    @using (Html.BeginForm("IndexCatalog", "Admin", FormMethod.Get, new { @class = "navbar-form" }))
+    {
+        <div class="form-group" style="display:inline;">
+            <div class="input-group">
+                <input class="form-control" type="text" name="search" />
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="submit" value="Search">Search</button>
+                </span>
+            </div>
+        </div>
+    }
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditCatalog", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "DeleteCatalog", new { id = item.ID })
+            </td>
+        </tr>
+    }
+</table>

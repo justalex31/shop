@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@if (User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout", "Account", FormMethod.Get, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="">@User.Identity.Name</a></li>
+            @if (!User.IsInRole("admin"))
+            {
+                <li>Order</li>
+            }
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+    </ul>
+}
